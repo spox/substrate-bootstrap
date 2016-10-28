@@ -1,13 +1,8 @@
 #!/bin/sh
 
-export DEBIAN_FRONTEND=noninteractive
-REPO_DEB_URL="http://apt.puppetlabs.com/puppetlabs-release-precise.deb"
-
 apt-get update
-apt-get -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install curl
+apt-get install ruby-full rubygems1.8
+gem install json_pure -v '~> 1.0' --no-ri --no-rdoc
+gem install puppet -v '~> 3.0' --no-ri --no-rdoc
 
-rm -f /tmp/puppet.deb
-curl -o /tmp/puppet.deb -L $REPO_DEB_URL
-dpkg -i /tmp/puppet.deb
-
-apt-get -yq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install puppet
+ln -s /var/lib/gems/1.8/bin/puppet /usr/local/bin/puppet
