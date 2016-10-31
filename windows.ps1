@@ -18,24 +18,36 @@ $PuppetInstallDestination = [System.IO.Path]::Combine($TmpDir, "puppet.ps1")
 
 $WebClient = New-Object System.Net.WebClient
 
+Write-Host "Downloading Windows Build Tools."
 $WebClient.DownloadFile($BuildToolsURL, $BuildToolsDestination)
+Write-Host "Windows Build Tools successfully downloaded."
+Write-Host "Downloading Wix toolset."
 $WebClient.DownloadFile($WixURL, $WixDestination)
+Write-Host "Wix toolset successfully downloaded."
+Write-Host "Downloading puppet installation powershell script."
 $WebClient.DownloadFile($PuppetInstallURL, $PuppetInstallDestination)
+Write-Host "Puppet installation powershell script successfully downloaded."
 
 $BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
+Write-Host "Installing Windows Build Tools."
 $BuildToolsProcess = Start-Process -FilePath $BuildToolsDestination -ArgumentList $BuildToolsInstallArgs -Wait -PassThru
 
 if ($BuildToolsProcess.ExitCode -ne 0) {
   Write-Host "Failed to install Windows Build Tools."
   Exit 1
 }
+Write-Host "Windows Build Tools successfully installed."
+
 
 $WixInstallArgs = @("/quiet", "/norestart")
+Write-Host "Installing Wix toolset."
 $WixProcess = Start-Process -FilePath $WixDestination -ArgumentList $WixInstallArgs -Wait -PassThru
 
 if ($WixProcess.ExitCode -ne 0) {
   Write-Host "Failed to install Wix Toolset."
   Exit 1
 }
+Write-Host "Wix toolset successfully installed."
 
+Write-Host "Starting puppet installation script."
 Invoke-Expression $PuppetInstallDestination
