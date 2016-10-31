@@ -28,6 +28,9 @@ Write-Host "Downloading puppet installation powershell script."
 $WebClient.DownloadFile($PuppetInstallURL, $PuppetInstallDestination)
 Write-Host "Puppet installation powershell script successfully downloaded."
 
+Set-ExecutionPolicy bypass
+$env:SEE_MASK_NOZONECHECKS=1
+
 $BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
 Write-Host "Installing Windows Build Tools."
 $BuildToolsProcess = Start-Process -FilePath $BuildToolsDestination -ArgumentList $BuildToolsInstallArgs -Wait -PassThru
