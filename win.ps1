@@ -53,4 +53,4 @@ Invoke-Expression $PuppetInstallDestination
 
 Write-Host "Starting substrate build"
 mkdir C:\vagrant\substrate-assets
-Invoke-Expression C:\vagrant\substrate\run.bat C:\vagrant\substrate-assets
+Invoke-Expression C:\vagrant\substrate\run.ps1 C:\vagrant\substrate-assets
