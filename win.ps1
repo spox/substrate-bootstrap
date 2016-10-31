@@ -40,32 +40,13 @@ $DotNetUpgradeInstallArgs = @("/norestart", "/q")
 Write-Host "Installing .net framework upgrade."
 $DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
 
-if ($DotNetUpgradeInstallArgs.ExitCode -ne 0) {
-  Write-Host "Failed to install .net framework upgrade."
-  Exit 1
-}
-Write-Host ".net framework upgrade successfully installed."
-
 $BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
 Write-Host "Installing Windows Build Tools."
 $BuildToolsProcess = Start-Process -FilePath $BuildToolsDestination -ArgumentList $BuildToolsInstallArgs -Wait -PassThru
 
-if ($BuildToolsProcess.ExitCode -ne 0) {
-  Write-Host "Failed to install Windows Build Tools."
-  Exit 1
-}
-Write-Host "Windows Build Tools successfully installed."
-
-
 $WixInstallArgs = @("/quiet", "/norestart")
 Write-Host "Installing Wix toolset."
 $WixProcess = Start-Process -FilePath $WixDestination -ArgumentList $WixInstallArgs -Wait -PassThru
-
-if ($WixProcess.ExitCode -ne 0) {
-  Write-Host "Failed to install Wix Toolset."
-  Exit 1
-}
-Write-Host "Wix toolset successfully installed."
 
 Write-Host "Starting puppet installation script."
 Invoke-Expression $PuppetInstallDestination
