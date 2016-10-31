@@ -50,3 +50,7 @@ $WixProcess = Start-Process -FilePath $WixDestination -ArgumentList $WixInstallA
 
 Write-Host "Starting puppet installation script."
 Invoke-Expression $PuppetInstallDestination
+
+Write-Host "Starting substrate build"
+mkdir C:\vagrant\substrate-assets
+Invoke-Expression C:\vagrant\substrate\run.bat C:\vagrant\substrate-assets
