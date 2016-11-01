@@ -48,7 +48,6 @@ if($TestSocket.Connected) {
   $Proxy = New-Object System.Net.WebProxy("http://192.168.1.1:8123")
   $WebClient.proxy = $Proxy
 }
-$TestSocket.Dispose()
 $TestSocket = $null
 
 Write-Host "Downloading .net framework upgrade."
