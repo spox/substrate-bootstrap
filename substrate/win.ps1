@@ -48,7 +48,10 @@ if($TestSocket.Connected) {
   $Proxy = New-Object System.Net.WebProxy("http://192.168.1.1:8123")
   $WebClient.proxy = $Proxy
   $env:http_proxy="http://192.168.1.1:8123"
+  $ProxyArgs = @("winhttp", "set", "proxy", "http://192.168.1.1:8123")
   netsh winhttp set proxy 192.168.1.1:8123
+  Set-ItemProperty -Path "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value 1
+  Set-ItemProperty -Path "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyServer -Value "http://192.168.1.1:8123"
 }
 $TestSocket = $null
 
