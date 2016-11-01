@@ -50,15 +50,15 @@ if($TestSocket.Connected) {
 }
 $TestSocket = $null
 
-Write-Host "Downloading .net framework upgrade."
-$WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
-Write-Host ".net framework upgrade successfully downloaded."
-Write-Host "Downloading Windows Build Tools."
-$WebClient.DownloadFile($BuildToolsURL, $BuildToolsDestination)
-Write-Host "Windows Build Tools successfully downloaded."
-Write-Host "Downloading Wix toolset."
-$WebClient.DownloadFile($WixURL, $WixDestination)
-Write-Host "Wix toolset successfully downloaded."
+# Write-Host "Downloading .net framework upgrade."
+# $WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
+# Write-Host ".net framework upgrade successfully downloaded."
+# Write-Host "Downloading Windows Build Tools."
+# $WebClient.DownloadFile($BuildToolsURL, $BuildToolsDestination)
+# Write-Host "Windows Build Tools successfully downloaded."
+# Write-Host "Downloading Wix toolset."
+# $WebClient.DownloadFile($WixURL, $WixDestination)
+# Write-Host "Wix toolset successfully downloaded."
 Write-Host "Downloading puppet installer."
 $WebClient.DownloadFile($PuppetURL, $PuppetDestination)
 Write-Host "Puppet installer successfully downloaded."
@@ -66,17 +66,17 @@ Write-Host "Puppet installer successfully downloaded."
 Set-ExecutionPolicy bypass
 $env:SEE_MASK_NOZONECHECKS=1
 
-$DotNetUpgradeInstallArgs = @("/norestart", "/q")
-Write-Host "Installing .net framework upgrade."
-$DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
+# $DotNetUpgradeInstallArgs = @("/norestart", "/q")
+# Write-Host "Installing .net framework upgrade."
+# $DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
 
-$BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
-Write-Host "Installing Windows Build Tools."
-$BuildToolsProcess = Start-Process -FilePath $BuildToolsDestination -ArgumentList $BuildToolsInstallArgs -Wait -PassThru
+# $BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
+# Write-Host "Installing Windows Build Tools."
+# $BuildToolsProcess = Start-Process -FilePath $BuildToolsDestination -ArgumentList $BuildToolsInstallArgs -Wait -PassThru
 
-$WixInstallArgs = @("/quiet", "/norestart")
-Write-Host "Installing Wix toolset."
-$WixProcess = Start-Process -FilePath $WixDestination -ArgumentList $WixInstallArgs -Wait -PassThru
+# $WixInstallArgs = @("/quiet", "/norestart")
+# Write-Host "Installing Wix toolset."
+# $WixProcess = Start-Process -FilePath $WixDestination -ArgumentList $WixInstallArgs -Wait -PassThru
 
 Write-Host "Installing Puppet."
 $PuppetInstallArgs = @("/qn", "/norestart", "/i", $PuppetDestination)
