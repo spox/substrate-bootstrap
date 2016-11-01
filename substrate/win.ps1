@@ -37,6 +37,20 @@ $PuppetDestination = [System.IO.Path]::Combine($TmpDir, "puppet.msi")
 
 $WebClient = New-Object System.Net.WebClient
 
+# Check if proxy is available and configure if found
+$TestSocket = New-Object Net.Sockets.TcpClient
+$ErrorActionPreference = 'SilentlyContinue'
+$TestSocket.Connect('192.168.1.1', 8123)
+$ErrorActionPreference = 'Continue'
+if($TestSocket.Connected) {
+  $TestSocket.Close()
+  Write-Host "HTTP proxy detected. Enabling."
+  $Proxy = New-Object System.Net.WebProxy("http://192.168.1.1:8123")
+  $WebClient.proxy = $Proxy
+}
+$TestSocket.Dispose()
+$TestSocket = $null
+
 Write-Host "Downloading .net framework upgrade."
 $WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
 Write-Host ".net framework upgrade successfully downloaded."
