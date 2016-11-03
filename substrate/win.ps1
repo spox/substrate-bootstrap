@@ -24,6 +24,7 @@ function savepowershellfromitself {
 savepowershellfromitself
 
 $DotNetUpgradeURL = "https://download.microsoft.com/download/E/2/1/E21644B5-2DF2-47C2-91BD-63C560427900/NDP452-KB2901907-x86-x64-AllOS-ENU.exe"
+$Powershell3URL = "https://download.microsoft.com/download/E/7/6/E76850B8-DA6E-4FF5-8CCE-A24FC513FD16/Windows6.1-KB2506143-x64.msu"
 $BuildToolsURL = "https://download.microsoft.com/download/E/E/D/EEDF18A8-4AED-4CE0-BEBE-70A83094FC5A/BuildTools_Full.exe"
 $WixURL = "http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=wix&DownloadId=1587179&FileTime=131118854865270000&Build=21031"
 $PuppetURL = "https://downloads.puppetlabs.com/windows/puppet-3.8.7.msi"
@@ -31,6 +32,7 @@ $PuppetURL = "https://downloads.puppetlabs.com/windows/puppet-3.8.7.msi"
 $TmpDir = [System.IO.Path]::GetTempPath()
 
 $DotNetUpgradeDestination = [System.IO.Path]::Combine($TmpDir, "dotnet-upgrade.exe")
+$Powershell3Destination = [System.IO.Path]::Combine($TmpDir, "powershell-upgrade.msu")
 $BuildToolsDestination = [System.IO.Path]::Combine($TmpDir, "build.exe")
 $WixDestination = [System.IO.Path]::Combine($TmpDir, "wix.exe")
 $PuppetDestination = [System.IO.Path]::Combine($TmpDir, "puppet.msi")
@@ -55,9 +57,12 @@ if($TestSocket.Connected) {
 }
 $TestSocket = $null
 
-Write-Host "Downloading .net framework upgrade."
-$WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
-Write-Host ".net framework upgrade successfully downloaded."
+#Write-Host "Downloading .net framework upgrade."
+#$WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
+#Write-Host ".net framework upgrade successfully downloaded."
+Write-Host "Downloading Powershell 3 upgrade."
+$WebClient.DownloadFile($Powershell3URL, $Powershell3Destination)
+Write-Host "Powershell 3 upgrade successfully downloaded."
 # Write-Host "Downloading Windows Build Tools."
 # $WebClient.DownloadFile($BuildToolsURL, $BuildToolsDestination)
 # Write-Host "Windows Build Tools successfully downloaded."
@@ -71,9 +76,13 @@ Write-Host "Puppet installer successfully downloaded."
 Set-ExecutionPolicy bypass
 $env:SEE_MASK_NOZONECHECKS=1
 
-$DotNetUpgradeInstallArgs = @("/norestart", "/q")
-Write-Host "Installing .net framework upgrade."
-$DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
+#$DotNetUpgradeInstallArgs = @("/norestart", "/q")
+#Write-Host "Installing .net framework upgrade."
+#$DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
+
+$Powershell3UpgradeArgs = @($Powershell3Destination, "/quiet", "/norestart")
+Write-Host "Installing Powershell 3 upgrade."
+$PowerShell3Process = Start-Process -FilePath wusa -ArgumentList $Powershell3UpgradeArgs -Wait -PassThru
 
 # $BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
 # Write-Host "Installing Windows Build Tools."
