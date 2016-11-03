@@ -45,7 +45,7 @@ $ErrorActionPreference = 'Continue'
 if($TestSocket.Connected) {
   $TestSocket.Close()
   Write-Host "HTTP proxy detected. Enabling."
-  $Proxy = New-Object System.Net.WebProxy("http://192.168.1.1:8123")
+  $Proxy = New-Object System.Net.WebProxy("http://192.168.1.1:8123", $true)
   $WebClient.proxy = $Proxy
   $env:http_proxy="http://192.168.1.1:8123"
   $ProxyArgs = @("winhttp", "set", "proxy", "http://192.168.1.1:8123")
@@ -55,9 +55,9 @@ if($TestSocket.Connected) {
 }
 $TestSocket = $null
 
-# Write-Host "Downloading .net framework upgrade."
-# $WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
-# Write-Host ".net framework upgrade successfully downloaded."
+Write-Host "Downloading .net framework upgrade."
+$WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
+Write-Host ".net framework upgrade successfully downloaded."
 # Write-Host "Downloading Windows Build Tools."
 # $WebClient.DownloadFile($BuildToolsURL, $BuildToolsDestination)
 # Write-Host "Windows Build Tools successfully downloaded."
@@ -71,9 +71,9 @@ Write-Host "Puppet installer successfully downloaded."
 Set-ExecutionPolicy bypass
 $env:SEE_MASK_NOZONECHECKS=1
 
-# $DotNetUpgradeInstallArgs = @("/norestart", "/q")
-# Write-Host "Installing .net framework upgrade."
-# $DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
+$DotNetUpgradeInstallArgs = @("/norestart", "/q")
+Write-Host "Installing .net framework upgrade."
+$DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
 
 # $BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
 # Write-Host "Installing Windows Build Tools."
