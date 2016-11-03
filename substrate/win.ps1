@@ -60,9 +60,9 @@ $TestSocket = $null
 #Write-Host "Downloading .net framework upgrade."
 #$WebClient.DownloadFile($DotNetUpgradeURL, $DotNetUpgradeDestination)
 #Write-Host ".net framework upgrade successfully downloaded."
-Write-Host "Downloading Powershell 3 upgrade."
-$WebClient.DownloadFile($Powershell3URL, $Powershell3Destination)
-Write-Host "Powershell 3 upgrade successfully downloaded."
+#Write-Host "Downloading Powershell 3 upgrade."
+#$WebClient.DownloadFile($Powershell3URL, $Powershell3Destination)
+#Write-Host "Powershell 3 upgrade successfully downloaded."
 # Write-Host "Downloading Windows Build Tools."
 # $WebClient.DownloadFile($BuildToolsURL, $BuildToolsDestination)
 # Write-Host "Windows Build Tools successfully downloaded."
@@ -80,9 +80,9 @@ $env:SEE_MASK_NOZONECHECKS=1
 #Write-Host "Installing .net framework upgrade."
 #$DotNetUpgradeProcess = Start-Process -FilePath $DotNetUpgradeDestination -ArgumentList $DotNetUpgradeInstallArgs -Wait -PassThru
 
-$Powershell3UpgradeArgs = @($Powershell3Destination, "/quiet", "/norestart")
-Write-Host "Installing Powershell 3 upgrade."
-$PowerShell3Process = Start-Process -FilePath wusa -ArgumentList $Powershell3UpgradeArgs -Wait -PassThru
+#$Powershell3UpgradeArgs = @($Powershell3Destination, "/quiet", "/norestart")
+#Write-Host "Installing Powershell 3 upgrade."
+#$PowerShell3Process = Start-Process -FilePath wusa -ArgumentList $Powershell3UpgradeArgs -Wait -PassThru
 
 # $BuildToolsInstallArgs = @("/NoRefresh", "/NoRestart", "/NoWeb", "/Quiet", "/Full")
 # Write-Host "Installing Windows Build Tools."
