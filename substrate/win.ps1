@@ -92,4 +92,4 @@ mkdir C:\vagrant\substrate-assets
 
 savepowershellfromitself
 
-Invoke-Expression "C:\vagrant\substrate\run.ps1 C:\vagrant\substrate-assets"
+Invoke-Expression "C:\vagrant\substrate\run.ps1 -OutputDir C:\vagrant\substrate-assets"
