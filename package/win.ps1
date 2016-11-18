@@ -60,7 +60,7 @@ if($TestSocket.Connected) {
 }
 $TestSocket = $null
 
-$WixHeat = Get-Command heat | Out-Null
+$WixHeat = Get-Command heat
 
 if(!$WixHeat){
   Write-Host "Required packaging setup not detected. Installing."
