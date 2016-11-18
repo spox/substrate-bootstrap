@@ -23,6 +23,9 @@ function savepowershellfromitself {
 
 savepowershellfromitself
 
+# Ensure we can find wix tools
+$env:Path += ";C:\Program Files (x86)\WiX Toolset v3.10\bin"
+
 $DotNetUpgradeURL = "https://download.microsoft.com/download/E/2/1/E21644B5-2DF2-47C2-91BD-63C560427900/NDP452-KB2901907-x86-x64-AllOS-ENU.exe"
 $Powershell3URL = "https://download.microsoft.com/download/E/7/6/E76850B8-DA6E-4FF5-8CCE-A24FC513FD16/Windows6.1-KB2506143-x64.msu"
 $BuildToolsURL = "https://download.microsoft.com/download/E/E/D/EEDF18A8-4AED-4CE0-BEBE-70A83094FC5A/BuildTools_Full.exe"
