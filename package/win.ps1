@@ -120,5 +120,5 @@ if(!$WixHeat){
 
   savepowershellfromitself
 
-  Invoke-Expression "C:\vagrant\package\package.ps1 -SubstratePath=${SubstratePath} -VagrantRevision=master"
+  Invoke-Expression "C:\vagrant\package\package.ps1 -SubstratePath ${SubstratePath} -VagrantRevision master"
 }
