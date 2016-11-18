@@ -117,7 +117,7 @@ if(!$WixHeat){
     Move-Item $SubstrateDestination, $SubstratePath
   }
   Write-Host "Starting package build"
-
+  Set-Location -Path C:\vagrant\packages
   savepowershellfromitself
 
   Invoke-Expression "C:\vagrant\package\package.ps1 -SubstratePath ${SubstratePath} -VagrantRevision master"
